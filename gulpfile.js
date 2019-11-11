@@ -14,7 +14,7 @@ gulp.task("copy-html", function () {
         .pipe(gulp.dest("dist"));
 });
 
-gulp.task("default", ["copy-html"], function () {
+gulp.task("default", gulp.series("copy-html", function () {
     return browserify({
         basedir: '.',
         debug: true,
@@ -30,4 +30,4 @@ gulp.task("default", ["copy-html"], function () {
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest("dist"));
-});
+}));
